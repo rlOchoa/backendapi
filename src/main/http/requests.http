@@ -1,0 +1,81 @@
+### Registro de usuario
+POST http://localhost:8080/api/auth/register
+Content-Type: application/json
+
+{
+  "fullName": "Aria Luna",
+  "email": "aria@escom.mx",
+  "password": "clave123"
+}
+
+### Login de usuario
+POST http://localhost:8080/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "aria@escom.mx",
+  "password": "clave123"
+}
+
+###
+
+### Registro duplicado (mismo correo)
+POST http://localhost:8080/api/auth/register
+Content-Type: application/json
+
+{
+  "fullName": "Otra Aria",
+  "email": "aria@escom.mx",
+  "password": "claveDiferente"
+}
+
+### Login para obtener JWT
+POST http://localhost:8080/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "aria@escom.mx",
+  "password": "clave123"
+}
+
+###
+
+### Consulta del perfil usando JWT
+@token = eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhcmlhQGVzY29tLm14Iiwicm9sZSI6IlVTRVIiLCJpYXQiOjE3NDYzMjQyNzUsImV4cCI6MTc0NjMyNzg3NX0.FxHfObDnz6OVW74LTthhqZ7sTcF2f9A5OHP5Lrj9sck
+GET http://localhost:8080/api/user/me
+Authorization: Bearer {{token}}
+
+### Login para obtener el token
+POST http://localhost:8080/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "aria@escom.mx",
+  "password": "clave123"
+}
+
+###
+
+### Actualizar perfil del usuario autenticado
+PUT http://localhost:8080/api/user/me
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "fullName": "Aria L. Vanillaware"
+}
+
+### Login para obtener el token
+POST http://localhost:8080/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "aria@escom.mx",
+  "password": "clave123"
+}
+
+###
+
+### Eliminar cuenta del usuario autenticado
+DELETE http://localhost:8080/api/user/me
+Authorization: Bearer {{token}}
