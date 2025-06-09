@@ -18,7 +18,11 @@ data class User(
     var fullName: String,
 
     @Enumerated(EnumType.STRING)
-    val role: Role = Role.USER
+    val role: Role = Role.USER,
+
+    @Column(name = "profile_picture_url")
+    var profilePictureUrl: String? = null
+
 )
 
 enum class Role {

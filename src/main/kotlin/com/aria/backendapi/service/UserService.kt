@@ -8,6 +8,8 @@ import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import com.aria.backendapi.util.JwtUtil
+import org.springframework.http.HttpStatus
+import org.springframework.web.server.ResponseStatusException
 
 @Service
 class UserService(
@@ -84,6 +86,12 @@ class UserService(
                 role = it.role.name
             )
         }
+    }
+
+    fun isAdmin(email: String): Boolean {
+        val user = userRepository.findByEmail(email)
+            .orElseThrow { ResponseStatusException(HttpStatus.NOT_FOUND, "Usuario no encontrado.") }
+        return user.role.name == "ADMIN"
     }
 }
 
